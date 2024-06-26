@@ -18,23 +18,26 @@ flipBtn.addEventListener('click', flip)
 
 // Creating 2 Boards in gameBoardsContainer
 function createBoard (color, user) {
-    const gameBoardContainer = document.createElement('div')
-    gameBoardContainer.classList.add('game-board')
-    gameBoardContainer.style.backgroundColor = color
-    gameBoardContainer.id = user
+    const board = document.querySelector('.board')
+    board.classList.add('game-board')
+    board.style.backgroundColor = color
+    board.id = user
 
     for (let i = 0; i < 100; i++){
         const block = document.createElement('div')
         block.classList.add('block')
         block.id = i //adding each block's id 0-100
-        gameBoardContainer.append(block)//inside gameboard add little block
+        board.append(block)//inside gameboard add little block
     }
 
-    gamesBoardContainer.append(gameBoardContainer)
+    if(board.id === 'computer'){
+
+    }
+    gamesBoardContainer.append(board)
 }
 
 createBoard('gray', 'player')
-createBoard('gray', 'computer')
+createBoard('gray','computer')
 
 // Creating Ships 
 
@@ -229,7 +232,7 @@ function handleClick(e){
         playerTurn = false
         const allBoardBlocks = document.querySelectorAll('#computer div')
         allBoardBlocks.forEach(block => block.replaceWith(block.cloneNode(true)))
-        setTimeout(computerGo, 3000)
+        setTimeout(hardComputerGo, 3000)
     }
 
 
@@ -287,6 +290,131 @@ function computerGo(e) {
     }
 }
 
+//Hard Mode for computer 
+let huntMode = true; // This will switch between hunt and target mode
+let lastHit = null; // The last hit block coordinates
+let potentialTargets = []; // Array to store potential targets in target mode
+
+function hardComputerGo() {
+    if(!gameOver){
+        turnDisplay.textContent = 'Computers Go!'
+        infoDisplay.textContent = 'The computer is thinking...'
+        setTimeout(() => {
+            if (huntMode) {
+                computerHuntMode();
+            } else {
+                computerTargetMode();
+            }
+
+            setTimeout(() => {
+                playerTurn = true;
+                turnDisplay.textContent = 'Your Go!';
+                infoDisplay.textContent = 'Please take your turn.';
+                const allBoardBlocks = document.querySelectorAll('#computer div');
+                allBoardBlocks.forEach(block => block.addEventListener('click', handleClick));
+            }, 3000);
+        }, 3000);
+    }
+}
+
+function computerHuntMode() {
+    const allBoardBlocks = document.querySelectorAll('#player div');
+    let randomGo = Math.floor(Math.random() * 100);
+
+    while (allBoardBlocks[randomGo].classList.contains('boom') || allBoardBlocks[randomGo].classList.contains('empty')) {
+        randomGo = Math.floor(Math.random() * 100);
+    }
+
+    const targetBlock = allBoardBlocks[randomGo];
+    rocketAnimation(targetBlock);
+
+    if (targetBlock.classList.contains('taken')) {
+        targetBlock.classList.add('boom');
+        lastHit = randomGo;
+        potentialTargets = getAdjacentBlocks(randomGo);
+        huntMode = false;
+        updateShipStatus(targetBlock, 'player');
+        infoDisplay.textContent = 'The computer hit your ship!';
+        //New//
+        let classes = Array.from(targetBlock.classList)
+                classes = classes.filter(className => className !== 'block')
+                classes = classes.filter(className => className !== 'boom')
+                classes = classes.filter(className => className !== 'taken')
+                computerHits.push(...classes)
+                checkScore('computer', computerHits, computerSunkShips)
+    } else {
+        targetBlock.classList.add('empty');
+        infoDisplay.textContent = 'Nothing hit this time.';
+    }
+}
+
+function computerTargetMode() {
+    if (potentialTargets.length === 0) {
+        huntMode = true;
+        computerHuntMode();
+        return;
+    }
+
+    const allBoardBlocks = document.querySelectorAll('#player div');
+    const targetIndex = potentialTargets.pop();
+    const targetBlock = allBoardBlocks[targetIndex];
+
+    if (targetBlock.classList.contains('boom') || targetBlock.classList.contains('empty')) {
+        computerTargetMode();
+        return;
+    }
+
+    rocketAnimation(targetBlock);
+
+    if (targetBlock.classList.contains('taken')) {
+        targetBlock.classList.add('boom');
+        potentialTargets = potentialTargets.concat(getAdjacentBlocks(targetIndex));
+        updateShipStatus(targetBlock, 'player');
+        infoDisplay.textContent = 'The computer hit your ship!';
+        let classes = Array.from(targetBlock.classList)
+                classes = classes.filter(className => className !== 'block')
+                classes = classes.filter(className => className !== 'boom')
+                classes = classes.filter(className => className !== 'taken')
+                computerHits.push(...classes)
+                checkScore('computer', computerHits, computerSunkShips)
+    } else {
+        targetBlock.classList.add('empty');
+        infoDisplay.textContent = 'Nothing hit this time.';
+    }
+}
+
+function getAdjacentBlocks(index) {
+    const row = Math.floor(index / 10);
+    const col = index % 10;
+    const adjacentBlocks = [];
+
+    if (row > 0) adjacentBlocks.push(index - 10); // Up
+    if (row < 9) adjacentBlocks.push(index + 10); // Down
+    if (col > 0) adjacentBlocks.push(index - 1);  // Left
+    if (col < 9) adjacentBlocks.push(index + 1);  // Right
+
+    return adjacentBlocks;
+}
+
+function updateShipStatus(targetBlock, user) {
+    if (targetBlock.classList.contains('destroyer')) {
+        shipStatus(user, 'destroyer');
+    } else if (targetBlock.classList.contains('submarine')) {
+        shipStatus(user, 'submarine');
+    } else if (targetBlock.classList.contains('cruiser')) {
+        shipStatus(user, 'cruiser');
+    } else if (targetBlock.classList.contains('battleship')) {
+        shipStatus(user, 'battleship');
+    } else if (targetBlock.classList.contains('carrier')) {
+        shipStatus(user, 'carrier');
+    }
+
+    const allBoardBlocks = document.querySelectorAll(`#${user} div`);
+    if (!allBoardBlocks[lastHit].classList.contains('taken')) {
+        huntMode = true;
+    }
+}
+
 function checkScore(user, userHits, userSunkShips) {
     function checkShip(shipName, shipLength) {
         if(userHits.filter(storedShipName => storedShipName === shipName).length === shipLength) {
@@ -327,14 +455,12 @@ function shipStatus(user,ship){
         case 'destroyer':
             let destroyerElement = document.querySelector(`.${user}-status .destroyer-ship .ship-health`);
             health = parseInt(destroyerElement.innerText.replace('%', '').trim())
-            checkHealth(health)
             health -= 50
             destroyerElement.innerText = `${health} %`
         break
         case 'submarine':
             let submarineElement = document.querySelector(`.${user}-status .submarine-ship .ship-health`);
             health = parseInt(submarineElement.innerText.replace('%', '').trim())
-            checkHealth(health)
             if(health === 34){
                 health = 0
                 submarineElement.innerText = `${health} %`
@@ -347,7 +473,6 @@ function shipStatus(user,ship){
         case 'cruiser':
             let cruiserElement = document.querySelector(`.${user}-status .cruiser-ship .ship-health`);
             health = parseInt(cruiserElement.innerText.replace('%', '').trim())
-            checkHealth(health)
             if(health === 34){
                 health = 0
                 cruiserElement.innerText = `${health} %`
@@ -360,14 +485,12 @@ function shipStatus(user,ship){
         case 'battleship':
             let battleshipElement = document.querySelector(`.${user}-status .battleship-ship .ship-health`);
             health = parseInt(battleshipElement.innerText.replace('%', '').trim())
-            checkHealth(health)
             health -= 25
             battleshipElement.innerText = `${health} %`
         break
         case 'carrier':
             let carrierElement = document.querySelector(`.${user}-status .carrier-ship .ship-health`);
             health = parseInt(carrierElement.innerText.replace('%', '').trim())
-            checkHealth(health)
             health -= 20
             carrierElement.innerText = `${health} %`
         break
@@ -376,10 +499,7 @@ function shipStatus(user,ship){
     }
 }
 
-function checkHealth(health){
-    if(health === 0){health = 0}
-    
-}
+
 
 //Rocket Animation
 function rocketAnimation(target) {
@@ -396,7 +516,7 @@ function rocketAnimation(target) {
     rocket.style.top = `${targetRect.top + window.scrollY}px`;
 
     // Trigger the rocket animation
-    rocket.style.animation = 'launch 1s forwards';
+    rocket.style.animation = 'launch 3s forwards';
     // Create and trigger the explosion after the rocket animation
     setTimeout(() => {
         // Remove the rocket
@@ -419,6 +539,6 @@ function rocketAnimation(target) {
         // Remove the explosion after animation
         setTimeout(() => {
             document.body.removeChild(explosion);
-        }, 3000);
+        }, 1000);
     }, 1000); // Duration of the rocket animation
 }

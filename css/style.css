@@ -1,4 +1,45 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Saira Stencil One', Arial, sans-serif;
+}
 
+
+.saira-stencil-one-regular {
+    font-family: "Saira Stencil One", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    }
+      
+
+.nav-bar {
+    display: flex;
+    flex-direction: row;
+    width: 150px;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+nav{
+    background-color: inherit;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.content h1 {
+    font-size: 90px;
+}
+
+#logo-img {
+    margin-top: 30px;
+    width: 300px;
+}
 
 .ships{
     width: 50px;
@@ -10,20 +51,44 @@
 .flex-box{
     display: flex;
     flex-direction: row;
+    width: 450px;
+    justify-content: space-between;
 }
+
+
 
 ul li {
     list-style: none;
 }
 
+button {
+	border-radius: 30px;
+	min-width: 150px;
+	padding: 1rem 2rem;
+    border: none;
+}
+
+button:hover {
+    background-color: white;
+    border: none;
+}
+
+.btn-div {
+    display: felx;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
 
 /* Ships container */
 .option-container {
-    width: 500px;
+    width: 220px;
     height: 60px;
     background-color: white;
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 
 /* Creating ships size and style */
@@ -106,7 +171,7 @@ ul li {
 }
 
 .empty {
-    background-color: white !important;
+    background-color: #4DA8E5 !important;
 }
 
 #computer .destroyer,
@@ -169,21 +234,3 @@ ul li {
         opacity: 0;
     }
 }
-
-button {
-	border-radius: 30px;
-	min-width: 150px;
-	padding: 1rem 2rem;
-	border: 1px solid currentColor;
-    margin-left: 20px;
-}
-
-button:hover {
-    background-color: gray;
-}
-
-.btn-div {
-    display: felx;
-    flex-direction: row;
-}
-

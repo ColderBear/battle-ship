@@ -82,11 +82,9 @@ const reveal = ()  => {
 
 const switchPages = () => {
     if ( page === 2 ) {
-      
         landingEl.classList.add('view--open');
     }
     else {
-        
         landingEl.classList.remove('view--open');
     }
 }
@@ -131,6 +129,29 @@ const unreveal = ()  => {
             attr: { d: paths.step1.unfilled }
         });
 }
+
+// Button 6
+function initBt6() {
+    var bt = document.querySelectorAll('#component-6')[0];
+    var turbVal = { val: 0.000001 };
+    var turb = document.querySelectorAll('#filter-glitch-2 feTurbulence')[0];
+    var btTl = new TimelineLite({ paused: true, onUpdate: function() {
+      turb.setAttribute('baseFrequency', '0.00001 ' + turbVal.val); // Firefox bug is value is 0
+    },
+    onStart: function() {
+      bt.style.filter = 'url(#filter-glitch-2)';
+    },
+    onComplete: function() {
+      bt.style.filter = 'none';
+    }});
+  
+    btTl.to(turbVal, 0.2, { val: 0.06 });
+    btTl.to(turbVal, 0.2, { val: 0.000001 });
+  
+    bt.addEventListener('click', function() {
+      btTl.restart();
+    });
+  }
 
 // click on menu button
 switchCtrl.addEventListener('click', reveal);

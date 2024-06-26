@@ -7,35 +7,48 @@
 		<link rel="shortcut icon" href="/asset/favicon.ico">
 		<link rel="stylesheet" type="text/css" href="css/base.css" />
         <link rel="stylesheet" type="text/css" href="css/style.css" />
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Saira+Stencil+One&display=swap" rel="stylesheet">
 		<script>document.documentElement.className="js";var supportsCssVars=function(){var e,t=document.createElement("style");return t.innerHTML="root: { --tmp-var: bold; }",document.head.appendChild(t),e=!!(window.CSS&&window.CSS.supports&&window.CSS.supports("font-weight","var(--tmp-var)")),t.parentNode.removeChild(t),e};supportsCssVars()||alert("Please view this demo in a modern browser");</script>
 		<script src="//tympanus.net/codrops/adpacks/analytics.js"></script>
 	</head>
 	<body>
-		<!-- <ul class="nav-bar">
-			<li><a href="">Home</a></li>
-			<li><a href="">How to play</a></li>
-			<li><a href="">About</a></li>
-		</ul> -->
+		<!-- <nav>
+			<ul class="nav-bar">
+				<li><a href="#home">Home</a></li>
+				<li><a href="#about">About</a></li>
+			</ul>
+		</nav> -->
 		<main>
 			<div class="view view--1">
+				<div class="content">
+					<h1>BattleShip</h1>
+					<h2>Explore the Depth of Battleship Warfare</h2>
+					<img id=logo-img src="asset/rmvship.png">
+				</div>
 				<button class="unbutton button button--open" aria-label="Open other view">Play</button>
 			</div>
 			<div class="view view--2">
                 <div id="game-info">
-                    <p>Turn: <span id="turn-display"></span></p>
-                    <p>Info: <span id="info"></span></p>
+                    <h1>Info: <span id="info">Drag your ships to the left of the board</span></h1>
+					<h2>Turn: <span id="turn-display"></span></h2>
                 </div>
 				
-                <div id="gamesboard-container"></div>
-                
-                <!-- holdes all the options for ships  -->
-                <div class="option-container">
-                    <div id="0" class="destroyer-prev destroyer" draggable="true"></div>
-                    <div id="1" class="submarine-prev submarine" draggable="true"></div>
-                    <div id="2" class="cruiser-prev cruiser" draggable="true"></div>
-                    <div id="3" class="battleship-prev battleship" draggable="true"></div>
-                    <div id="4" class="carrier-prev carrier" draggable="true"></div>
-                </div>
+                <div id="gamesboard-container">
+					<div class="board"></div>
+					<div class="board"></div>
+				</div>
+                <div>
+					<h3>Your Ships:</h3><!-- holdes all the options for ships  -->
+                	<div class="option-container">
+                    	<div id="0" class="destroyer-prev destroyer" draggable="true"></div>
+                    	<div id="1" class="submarine-prev submarine" draggable="true"></div>
+                    	<div id="2" class="cruiser-prev cruiser" draggable="true"></div>
+                    	<div id="3" class="battleship-prev battleship" draggable="true"></div>
+                    	<div id="4" class="carrier-prev carrier" draggable="true"></div>
+                	</div>
+				</div>
 				<div class="flex-box">
 					<div>
 						<ul class="player-status">
@@ -86,19 +99,11 @@
 						</ul>
 					</div>
 				</div>
-				<form id="game-mode-form">
-					<label>
-						<input type="radio" name="gameMode" value="easy" checked> Easy
-					</label>
-					<label>
-						<input type="radio" name="gameMode" value="hard"> Hard
-					</label>
-					<div class="btn-div">
-						<button id="flip-btn">Flip</button>
-						<button id="start-btn">Start</button>
-					</div>
-				</form>
-					<button class="unbutton button button--close" aria-label="Close current view">Back</button>
+				<div class="btn-div">
+					<button id="flip-btn">Flip</button>
+					<button id="start-btn">Start</button>
+				</div>
+					<button class="unbutton button button--6 button--close" aria-label="Close current view">Back</button>
 				</div>
             
             <svg class="overlay" width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none">
