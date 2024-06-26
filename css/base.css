@@ -37,24 +37,17 @@ a:hover {
 	outline: none;
 }
 
-/* Better focus styles from https://developer.mozilla.org/en-US/docs/Web/CSS/:focus-visible */
+
 a:focus {
-	/* Provide a fallback style for browsers
-	 that don't support :focus-visible */
 	outline: none;
 	background: lightgrey;
 }
 
 a:focus:not(:focus-visible) {
-	/* Remove the focus indicator on mouse-focus for browsers
-	 that do support :focus-visible */
 	background: transparent;
 }
 
 a:focus-visible {
-	/* Draw a very noticeable focus style for
-	 keyboard-focus on browsers that do support
-	 :focus-visible */
 	outline: 2px solid #fff;
 	background: transparent;
 }
@@ -77,33 +70,6 @@ main {
 	grid-template-columns: 100%;
 	grid-template-rows: 100vh;
 }
-
-/* .frame {
-	grid-area: 1 / 1 / 2 / 2;
-	padding: 1.5rem 2rem 10vh;
-	text-align: center; 
-	position: relative;
-	z-index: 100;
-	pointer-events: none;
-}
-
-.frame a {
-	pointer-events: auto;
-}
-
-.frame__title {
-	margin: 0;
-	font-size: 1rem;
-	font-weight: 500;
-}
-
-.frame__links {
-	margin: 0.5rem 0 2rem;
-}
-
-.frame__links a:not(:last-child) {
-	margin-right: 1rem;
-} */
 
 .button {
 	color: var(--color-button);
