@@ -1,0 +1,189 @@
+
+
+.ships{
+    width: 50px;
+    height: 50px;
+    border: 1px black solid;
+    margin-bottom: 10px;
+}
+
+.flex-box{
+    display: flex;
+    flex-direction: row;
+}
+
+ul li {
+    list-style: none;
+}
+
+
+/* Ships container */
+.option-container {
+    width: 500px;
+    height: 60px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+}
+
+/* Creating ships size and style */
+.destroyer{
+    background-color: brown;
+}
+
+.destroyer-prev {
+    width: 20px;
+    height: 10px;
+    margin: 3px;
+}
+
+.submarine {
+    background-color: green;
+}
+
+.submarine-prev {
+    width: 30px;
+    height: 10px;
+    margin: 3px;
+}
+
+.cruiser {
+    background-color: purple;
+}
+
+.cruiser-prev {
+    width: 30px;
+    height: 10px;
+    margin: 3px;
+}
+
+.battleship {
+    background-color: orange;
+}
+
+.battleship-prev {
+    width: 40px;
+    height: 10px;
+    margin: 3px;
+}
+
+.carrier {
+    background-color: blue;
+}
+
+.carrier-prev {
+    width: 50px;
+    height: 10px;
+    margin: 3px;
+}
+
+.game-board {
+    width: 200px;
+    height: 200px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#gamesboard-container {
+    width: 500px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.block {
+    width: 20px;
+    height: 20px;
+    border: solid 1px white;
+    box-sizing: border-box;
+}
+
+.hover {
+    background-color: grey;
+}
+
+.boom {
+    background-color: red !important;
+}
+
+.empty {
+    background-color: white !important;
+}
+
+#computer .destroyer,
+#computer .submarine,
+#computer .cruiser,
+#computer .battleship,
+#computer .carrier{
+    background-color: gray;
+}
+
+
+/* Define the rocket */
+.rocket {
+    position: absolute;
+    width: 20px;
+    height: 40px;
+    background: url('/asset/rocket.png') no-repeat center center;
+    background-size: contain;
+    transform: translateY(-100%);
+    opacity: 0;
+    transition: opacity 0.2s ease-in;
+}
+
+/* Define the bomb explosion */
+.explosion {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: url('/asset/explosion.png') no-repeat center center;
+    background-size: contain;
+    opacity: 0;
+    transition: opacity 0.2s ease-in;
+}
+
+
+/* Animation for launching the rocket */
+@keyframes launch {
+    0% {
+        transform: translateY(100%);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+}
+
+/* Animation for the explosion */
+@keyframes explode {
+    0% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 0;
+    }
+}
+
+button {
+	border-radius: 30px;
+	min-width: 150px;
+	padding: 1rem 2rem;
+	border: 1px solid currentColor;
+    margin-left: 20px;
+}
+
+button:hover {
+    background-color: gray;
+}
+
+.btn-div {
+    display: felx;
+    flex-direction: row;
+}
+
