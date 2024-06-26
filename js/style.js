@@ -1,11 +1,6 @@
-// frame element
+
 const frame = document.querySelector('.frame');
-
-// overlay (SVG path element)
 const overlayPath = document.querySelector('.overlay__path');
-
-// paths
-// edit here: https://yqnn.github.io/svg-path-editor/
 const paths = {
     step1: {
         unfilled: 'M 0 100 V 100 Q 50 100 100 100 V 100 z',
