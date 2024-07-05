@@ -2,64 +2,93 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Saira Stencil One', Arial, sans-serif;
+    font-family: 'Bebas Neue', Arial, sans-serif;
+    text-align: center;
 }
 
-
-.saira-stencil-one-regular {
-    font-family: "Saira Stencil One", sans-serif;
+.bebas-neue-regular {
+    font-family: "Bebas Neue", sans-serif;
     font-weight: 400;
     font-style: normal;
-    }
-      
+  }
 
-.nav-bar {
+html {
+    scroll-behavior: smooth;
+}
+
+.title {
+    padding: 30px;
+}
+
+.navbar {
+    background: transparent;
+    height: 60px;
+    font-size: 1.2rem;
+    position: fixed; 
+    top: 0;
+    padding: 30px;
+    width: 100%;
+    z-index: 1000; 
+}
+
+.nav-menu {
+    background: transparent;
     display: flex;
     flex-direction: row;
-    width: 150px;
-    justify-content: space-between;
-    padding: 20px;
-}
-
-nav{
-    background-color: inherit;
-}
-
-.content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.content h1 {
-    font-size: 90px;
-}
-
-#logo-img {
-    margin-top: 30px;
-    width: 300px;
-}
-
-.ships{
-    width: 50px;
-    height: 50px;
-    border: 1px black solid;
-    margin-bottom: 10px;
-}
-
-.flex-box{
-    display: flex;
-    flex-direction: row;
-    width: 450px;
-    justify-content: space-between;
-}
-
-
-
-ul li {
+    justify-content: start;
     list-style: none;
+    font-size: 25px;
 }
+
+.nav-menu li{
+    margin-left: 20px;
+}
+
+ul li a{
+    display: block;
+    position:relative;
+    text-decoration:none;
+    padding:5px;
+    font-size:18px;
+    font-family: sans-serif;
+    color:#fff;
+    text-transform:uppercase;
+    transition:0.5s;
+  }
+  
+  ul:hover li a{
+    transform:scale(1.5);
+    opacity:0.2;
+    filter:blur(5px);
+  }
+  
+  ul li a:hover{
+    transform:scale(2);
+    opacity:1;
+    filter:blur(0);
+    text-decoration:none;
+    color:#fff;
+  }
+  
+  ul li a:before{
+    content:'';
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:#1C1D2F;
+    transition:0.5s;
+    transform-origin:right;
+    transform:scaleX(0);
+    z-index:-1;
+  }
+  
+  ul li a:hover:before{
+    transition:transform 0.5s;
+    transform-origin:left;
+    transform:scaleX(1);
+  }
 
 button {
 	border-radius: 30px;
@@ -70,7 +99,6 @@ button {
 
 button:hover {
     background-color: white;
-    border: none;
 }
 
 .btn-div {
@@ -80,11 +108,201 @@ button:hover {
     align-items: center;
 }
 
+.view {
+    color: white;
+    background-color: #1C1D2F;
+    min-height: 100vh;
+}
+
+.view--1 {
+    background-image: url('/asset/battleship.webp');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-size: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.view--2 {
+    display: flex;
+    justify-content: space-around;
+    align-items: center
+}
+
+ h1 {
+    font-size: 80px;
+}
+
+.home-content > h1 {
+    font-size: 150px;
+}
+
+.home-content > h2 {
+    font-size: 60px;
+    color: white;
+    text-shadow: 2px 2px#1C1D2F;
+}
+
+.view--2 h3 {
+    color: #8792B6;
+    font-size: 50px;
+    padding: 20px;
+}
+
+.view--2 p {
+    font-size: 25px;
+}
+
+.landing-page-pic {
+    width: 650px;
+    height: 70vh;
+    border-radius: 20px;
+    margin: 20px;
+}
+
+.view--4 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+/* Play Page */
+
+.view--3 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #1C1D2F;
+}
+
+#back-btn {
+    text-decoration: underline;
+}
+
+.game-and-status-container {
+    display: flex;
+    justify-content: space-between; /* Adjust the spacing as needed */
+    width: 100%;
+}
+
+
+.player-status > li {
+    list-style: none;
+    font-size: 20px;
+    margin: 20px 0 0 30px;
+    text-align: left;
+}
+
+
+.computer-status > li {
+    list-style: none;
+    font-size: 20px;
+    margin: 20px 30px 0 0;
+    text-align: left;
+}
+
+
+#game-info {
+    margin: 20px 0 30px;
+}
+
+#game-info > h1 {
+    font-size: 50px;
+}
+
+#game-info > h2 {
+    margin-top: 20px;
+    font-size: 30px;
+}
+
+.ships-container {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    min-height: 300px;
+}
+
+.ships-container > h3 {
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+.flex-box {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+.btn-div > button {
+    margin: 20px;
+}
+
+.btn-div > button:hover {
+    background-color:#8792B6;
+    color: white;
+}
+
+/* Slider */
+.slider {
+    position: relative;
+    width: 80%;
+    max-width: 800px;
+    overflow: hidden;
+    margin: 20px auto;
+    color: black;
+}
+
+.slider-container {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+    width:100%;
+    height: 300px;
+    box-sizing: border-box;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px;
+    position: relative;
+}
+
+.slide > h2 {
+    font-size: 25px;
+}
+
+.slide > p {
+    margin-top: 20px;
+    font-size: 20px;
+}
+
+.slide-pic {
+    width: 40px;
+    height: 40px;
+}
+
+.slide-pics {
+    position: absolute;
+    border: 1px solid black;
+    margin: 0 auto;
+}
+
 
 /* Ships container */
 .option-container {
-    width: 220px;
-    height: 60px;
+    width: 240px;
+    height: 80px;
+    border-radius: 10px;
     background-color: white;
     display: flex;
     align-items: center;
@@ -143,27 +361,27 @@ button:hover {
 }
 
 .game-board {
-    width: 200px;
-    height: 200px;
+    width: 300px;
+    height: 300px;
     display: flex;
     flex-wrap: wrap;
 }
 
 #gamesboard-container {
-    width: 500px;
+    width: 1000px;
     display: flex;
     justify-content: space-between;
 }
 
 .block {
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
     border: solid 1px white;
     box-sizing: border-box;
 }
 
 .hover {
-    background-color: grey;
+    background-color: black;
 }
 
 .boom {
@@ -179,7 +397,16 @@ button:hover {
 #computer .cruiser,
 #computer .battleship,
 #computer .carrier{
-    background-color: gray;
+background-color: gray;
+}
+
+#restart-btn {
+    background-color: red;
+    color: white;
+}
+
+#restart-btn:hover{
+    background-color: black;
 }
 
 
@@ -234,3 +461,31 @@ button:hover {
         opacity: 0;
     }
 }
+
+.animate-charcter
+{
+  text-transform: uppercase;
+  background-image: linear-gradient(
+    -225deg,
+    #8F97A7 0%,
+    #ACADB3 29%,
+    #8792B6 67%,
+    #1C1D2F 100%
+  );
+  background-size: auto auto;
+  background-clip: border-box;
+  background-size: 200% auto;
+  background-clip: text;
+  text-fill-color: transparent;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textclip 4s linear infinite;
+  display: inline-block;
+}
+
+@keyframes textclip {
+  to {
+    background-position: 200% center;
+  }
+}
+
