@@ -14,7 +14,7 @@ The game is chosen for its complexity of game play logic. Developing this game a
 3. Start the game and take turns to attack the opponent's grid.
 4. The game ends when all ships are sunk.
 
-## [Click here to play](http://127.0.0.1:5500/html/index.html) 👈🏼
+## [Click here to play](https://timothyweng-0606.github.io/battle-ship/) 👈🏼
 
 ## Attributions 👨🏻‍💻
 * Animation Navbar Hover Effect: Applied to create a visual appealing effect 
